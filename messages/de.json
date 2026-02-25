@@ -1,0 +1,55 @@
+{
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolgreich",
+    "back": "Zurück"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "settings": "Einstellungen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "menuLabel": "Navigation"
+  },
+  "error": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut.",
+    "tryAgain": "Erneut versuchen"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht.",
+    "goHome": "Zum Dashboard"
+  },
+  "login": {
+    "title": "Anmelden",
+    "subtitle": "Melde dich an, um fortzufahren.",
+    "signIn": "Mit SSO anmelden",
+    "signingIn": "Anmeldung...",
+    "error": "Anmeldung fehlgeschlagen. Bitte versuche es erneut."
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "theme": "Design",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
+    "themeAuto": "Auto",
+    "language": "Sprache",
+    "languageDe": "Deutsch",
+    "languageEn": "English",
+    "signOut": "Abmelden"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Willkommen zurück, {name}!",
+    "recentPosts": "Neueste Beiträge",
+    "noPosts": "Noch keine Beiträge",
+    "noPostsDescription": "Erstelle deinen ersten Beitrag, um loszulegen."
+  }
+}

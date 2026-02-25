@@ -1,0 +1,55 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "back": "Back"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuLabel": "Navigation"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "tryAgain": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist.",
+    "goHome": "Go to dashboard"
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Sign in to your account to continue.",
+    "signIn": "Sign in with SSO",
+    "signingIn": "Signing in...",
+    "error": "Sign in failed. Please try again."
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeAuto": "Auto",
+    "language": "Language",
+    "languageDe": "Deutsch",
+    "languageEn": "English",
+    "signOut": "Sign out"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back, {name}!",
+    "recentPosts": "Recent posts",
+    "noPosts": "No posts yet",
+    "noPostsDescription": "Create your first post to get started."
+  }
+}
