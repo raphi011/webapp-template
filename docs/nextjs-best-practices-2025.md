@@ -311,6 +311,7 @@ export const config = {
 - [ ] `config.matcher` excludes static assets and public routes
 - [ ] Redirect URLs validated (no open redirect via `returnTo` params)
 - [ ] Protected routes redirect to login, auth pages redirect to app when session exists
+- [ ] `returnTo` parameter validated (starts with `/`, no `//`, no `:`) — see `proxy.ts`
 
 ---
 

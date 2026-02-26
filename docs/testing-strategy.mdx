@@ -219,6 +219,9 @@ test("unauthenticated user is redirected to /login", async ({ page }) => {
 | Post creation → DB row → UI update | Playwright |
 | Settings change → persistence | Playwright |
 | Middleware redirects (expired session) | Playwright |
+| useActionState form submission flow | Storybook |
+| Suspense fallback rendering | Storybook |
+| Progressive enhancement (form works without JS) | Playwright |
 
 **Rule of thumb:** Pure business logic with no I/O → unit test (table-driven). Database queries → DB integration. UI behavior with mock data → Storybook. Full-stack flow with server + database → Playwright.
 

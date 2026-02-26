@@ -43,6 +43,7 @@
     "language": "Language",
     "languageDe": "Deutsch",
     "languageEn": "English",
+    "languageError": "Failed to change language. Please try again.",
     "signOut": "Sign out"
   },
   "dashboard": {
@@ -50,6 +51,10 @@
     "welcome": "Welcome back, {name}!",
     "recentPosts": "Recent posts",
     "noPosts": "No posts yet",
-    "noPostsDescription": "Create your first post to get started."
+    "noPostsDescription": "Create your first post to get started.",
+    "createPost": "Create post",
+    "postTitle": "Title",
+    "postContent": "Content",
+    "postCreated": "Post created successfully."
   }
 }

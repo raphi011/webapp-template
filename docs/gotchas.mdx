@@ -84,6 +84,21 @@ const [state, action, isPending] = useActionState(serverAction, initialState);
 
 The state object carries `step`, `error`, and any data needed by the next step. This replaces the older `useFormState` API.
 
+### `useActionState` requires `prevState` as first action argument
+
+When wrapping a server action with `useActionState`, the action's signature must accept a previous state parameter as its first argument. This is easy to forget since standalone server actions don't need it:
+
+```tsx
+// ❌ BAD — breaks with useActionState
+export async function createPostAction(formData: FormData): Promise<ActionResult> { ... }
+
+// ✅ GOOD — works with useActionState (prevState injected automatically)
+export async function createPostAction(
+  _prevState: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> { ... }
+```
+
 ### `redirect()` throws (not returns)
 
 Next.js `redirect()` from `next/navigation` works by throwing a special error. It must be called **outside** of try/catch blocks, or the catch will swallow the redirect. In server actions, call it after all DB work completes.
@@ -232,13 +247,34 @@ When accepting a `returnTo` parameter from query strings (e.g., after login veri
 
 ```ts
 function isValidReturnTo(returnTo: string): boolean {
-  return (
-    returnTo.startsWith("/") &&   // Must be relative
-    !returnTo.startsWith("//") && // Block protocol-relative (//evil.com)
-    !returnTo.includes(":")       // Block javascript: and data: schemes
-  );
+  try {
+    const decoded = decodeURIComponent(returnTo);
+    return (
+      decoded.startsWith("/") &&   // Must be relative
+      !decoded.startsWith("//") && // Block protocol-relative (//evil.com)
+      !decoded.includes(":") &&    // Block javascript: and data: schemes
+      !decoded.includes("\\") &&   // Block backslash (treated as // in some browsers)
+      !decoded.includes("\n") &&   // Block header injection
+      !decoded.includes("\r")
+    );
+  } catch {
+    return false; // Malformed percent-encoding
+  }
 }
 ```
+
+---
+
+## React Compiler
+
+### Automatic memoization replaces useMemo/useCallback/memo
+
+With `reactCompiler: true` enabled in `next.config`, the React Compiler automatically memoizes components and hooks at build time. Manual `useMemo()`, `useCallback()`, and `React.memo()` are no longer necessary in most cases.
+
+**When to still use manual memoization:**
+- Third-party libs that compare by reference identity
+- Effect dependencies where semantic equality differs from referential equality
+- Performance-critical paths where you need guaranteed caching behavior
 
 ### Email enumeration protection
 

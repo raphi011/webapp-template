@@ -13,6 +13,7 @@ const createPostSchema = z.object({
 });
 
 export async function createPostAction(
+  _prevState: ActionResult | null,
   formData: FormData,
 ): Promise<ActionResult> {
   const user = await getCurrentUser();

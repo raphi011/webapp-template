@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { signOut } from "next-auth/react";
 import { useTheme } from "@/components/theme-provider";
@@ -14,11 +15,14 @@ const themes: Theme[] = ["light", "dark", "auto"];
 export function SettingsView() {
   const t = useTranslations("settings");
   const { theme, setTheme } = useTheme();
+  const [localeError, setLocaleError] = useState<string | null>(null);
 
   async function handleLocaleChange(locale: "de" | "en") {
+    setLocaleError(null);
     const result = await updateLanguageAction(locale);
     if (!result.success) {
       console.error("Language change failed:", result.error);
+      setLocaleError(t("languageError"));
       return;
     }
     window.location.reload();
@@ -72,6 +76,11 @@ export function SettingsView() {
               {t("languageEn")}
             </Button>
           </div>
+          {localeError && (
+            <p className="mt-2 text-sm text-red-600" role="alert">
+              {localeError}
+            </p>
+          )}
         </CardContent>
       </Card>
 

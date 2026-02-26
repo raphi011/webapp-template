@@ -12,13 +12,16 @@ async function seed() {
   console.log("Seeding database...");
 
   // Create example users
-  const [alice, bob] = await db
+  const rows = await db
     .insert(schema.users)
     .values([
       { id: "user-1", name: "Alice Johnson", email: "alice@example.com" },
       { id: "user-2", name: "Bob Smith", email: "bob@example.com" },
     ])
     .returning();
+
+  const alice = rows[0]!;
+  const bob = rows[1]!;
 
   console.log(`Created users: ${alice.name}, ${bob.name}`);
 

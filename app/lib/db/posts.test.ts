@@ -63,15 +63,34 @@ describe("posts repository", () => {
     expect(authorPosts.length).toBeGreaterThanOrEqual(2);
 
     for (let i = 1; i < authorPosts.length; i++) {
-      expect(authorPosts[i - 1].createdAt.getTime()).toBeGreaterThanOrEqual(
-        authorPosts[i].createdAt.getTime(),
+      const prev = authorPosts[i - 1]!;
+      const curr = authorPosts[i]!;
+      expect(prev.createdAt.getTime()).toBeGreaterThanOrEqual(
+        curr.createdAt.getTime(),
       );
     }
   });
 
-  it("returns all posts", async () => {
-    const all = await getAllPosts();
-    expect(all.length).toBeGreaterThanOrEqual(2);
+  it("returns all posts with pagination", async () => {
+    const result = await getAllPosts();
+    expect(result.rows.length).toBeGreaterThanOrEqual(2);
+    expect(result.total).toBeGreaterThanOrEqual(2);
+    expect(result.page).toBe(1);
+    expect(result.pageSize).toBe(20);
+  });
+
+  it("paginates with custom page and pageSize", async () => {
+    const result = await getAllPosts(1, 1);
+    expect(result.rows.length).toBe(1);
+    expect(result.total).toBeGreaterThanOrEqual(2);
+    expect(result.page).toBe(1);
+    expect(result.pageSize).toBe(1);
+  });
+
+  it("returns empty rows for page beyond data", async () => {
+    const result = await getAllPosts(999, 20);
+    expect(result.rows.length).toBe(0);
+    expect(result.total).toBeGreaterThanOrEqual(2);
   });
 
   it("returns null for non-existent post", async () => {

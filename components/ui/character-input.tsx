@@ -35,7 +35,7 @@ function CharacterInput({
     if (!sanitized) return;
 
     const arr = chars.slice();
-    arr[index] = sanitized[0];
+    arr[index] = sanitized[0] ?? "";
     onChange(arr.join(""));
 
     if (index < length - 1) {

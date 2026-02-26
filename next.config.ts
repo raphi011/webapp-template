@@ -1,3 +1,4 @@
+import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
@@ -10,6 +11,7 @@ const themeScriptHash = "sha256-5QqpIOLIHw9C4nV/M+9Z3jzN/lH2EHKkH12nm2Fnw8s=";
 const cspHeader = [
   "default-src 'self'",
   `script-src 'self' '${themeScriptHash}'`,
+  // unsafe-inline required for Next.js runtime style injection and Tailwind
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' blob: data:",
   "font-src 'self'",
@@ -19,14 +21,18 @@ const cspHeader = [
   "form-action 'self'",
 ].join("; ");
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   output: "standalone",
+  reactCompiler: true,
   async headers() {
     return [
       {
         source: "/:path*",
         headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
           { key: "X-Frame-Options", value: "DENY" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           {
@@ -38,7 +44,7 @@ const nextConfig = {
             value: "camera=(), microphone=(), geolocation=()",
           },
           {
-            key: "Content-Security-Policy-Report-Only",
+            key: "Content-Security-Policy",
             value: cspHeader,
           },
         ],

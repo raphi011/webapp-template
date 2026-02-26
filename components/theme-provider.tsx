@@ -51,6 +51,7 @@ export function ThemeProvider({
         const result = await updateThemeAction(next);
         if (!result.success) {
           console.error("Theme sync failed:", result.error);
+          // Client cookie is already set, so next page load will re-sync
         }
       });
     },

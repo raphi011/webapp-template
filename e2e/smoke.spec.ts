@@ -21,4 +21,13 @@ test.describe("smoke", () => {
       expect.objectContaining({ status: "ok" }),
     );
   });
+
+  test("security headers are present", async ({ request }) => {
+    const response = await request.get("/login");
+    const headers = response.headers();
+    expect(headers["content-security-policy"]).toContain("default-src 'self'");
+    expect(headers["strict-transport-security"]).toContain("max-age=63072000");
+    expect(headers["x-frame-options"]).toBe("DENY");
+    expect(headers["x-content-type-options"]).toBe("nosniff");
+  });
 });
